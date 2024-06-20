@@ -20,7 +20,7 @@ class PeliculaControllers {
   getPeliculaByTitulo = async (req, res) => {
     try {
       res.status(200).send({ success: true, message: "Pelicula por titulo" });
-      console.log(data);
+
     } catch (error) {
       res.status(400).send({ success: false, message: error });
     }
