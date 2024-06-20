@@ -11,6 +11,10 @@ routes.use("/peliculas",peliculasRoutes)
 routes.get("/", (req,res) => {
 
     res.send("GET GENERICO DEL LOCALHOST")
+
+    /// :ghfghf
 });
 
 export default routes;
+
+
