@@ -5,7 +5,7 @@ import sucursalesRoutes from "./sucursalesRoutes.js"
 const routes = Router();
 
 routes.use("/peliculas",peliculasRoutes)
-// routes.use("/sucursales",sucursalesRoutes)
+routes.use("/sucursales",sucursalesRoutes)
 
 
 routes.get("/", (req,res) => {
