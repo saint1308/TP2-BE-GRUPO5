@@ -1,13 +1,16 @@
 import { Router } from "express";
-import PeliculasController from "../Controllers/PeliculasController";
+import peliculasRoutes from "./peliculasRoutes.js"
+import sucursalesRoutes from "./sucursalesRoutes.js"
 
 const routes = Router();
 
-const palabrasController = new PeliculasController();
+routes.use("/peliculas",peliculasRoutes)
+// routes.use("/sucursales",sucursalesRoutes)
 
-routes.post("/", palabrasController.createPalabra);
-routes.get("/", palabrasController.getPalabras);
-routes.delete("/:palabra", palabrasController.deletePalabra);
-routes.get("/:cantidad", palabrasController.getCatidadPalabras);
+
+routes.get("/", (req,res) => {
+
+    res.send("GET GENERICO DEL LOCALHOST")
+});
 
 export default routes;
