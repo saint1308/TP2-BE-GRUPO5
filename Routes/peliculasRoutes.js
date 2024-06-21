@@ -6,7 +6,7 @@ const peliculaRoutes = Router();
 const peliculaController = new PeliculaControllers();
 
 peliculaRoutes.get("/", peliculaController.getAllPeliculas);
-peliculaRoutes.post("/:titulo", peliculaController.getPeliculaByTitulo);
+peliculaRoutes.get("/:titulo", peliculaController.getPeliculaByTitulo);
 peliculaRoutes.put("/:titulo", peliculaController.updatedPelicula);
 peliculaRoutes.delete("/:titulo", peliculaController.deletePelicula);
 

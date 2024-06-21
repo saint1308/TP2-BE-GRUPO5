@@ -19,9 +19,14 @@ class PeliculaControllers {
   };
 
   getPeliculaByTitulo = async (req, res) => {
+    
     try {
-      res.status(200).send({ success: true, message: "Pelicula por titulo" });
+      const titulo = req.params.titulo
+      const query = `SELECT titulo, anio, director, genero FROM peliculas WHERE titulo = "${titulo}"`;
+      const data = await dbConennection.query(query);
 
+      res.status(200).send({ success: true, message: "Pelicula por titulo" });
+      console.log(data)
     } catch (error) {
       res.status(400).send({ success: false, message: error });
     }

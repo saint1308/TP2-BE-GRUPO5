@@ -6,7 +6,8 @@ const sucursalesRoutes = Router();
 const sucursalController = new sucursalControllers();
 
 sucursalesRoutes.get("/", sucursalController.getAllSucursales);
-sucursalesRoutes.post("/:titulo", sucursalController.getSucursalByNombre);
+sucursalesRoutes.get("/:titulo", sucursalController.getSucursalByNombre);
+//sucursalesRoutes.post("/:titulo", sucursalController.getSucursalByNombre);
 sucursalesRoutes.put("/:titulo", sucursalController.updatedSucursal);
 sucursalesRoutes.delete("/:titulo", sucursalController.deleteSucursal);
 
