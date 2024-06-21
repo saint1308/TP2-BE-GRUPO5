@@ -21,7 +21,7 @@ class PeliculaControllers {
   getPeliculaByTitulo = async (req, res) => {
     
     try {
-      const titulo = req.params.titulo
+      const {titulo} = req.params
       const query = `SELECT titulo, anio, director, genero FROM peliculas WHERE titulo = "${titulo}"`;
       const data = await dbConennection.query(query);
 
@@ -34,7 +34,13 @@ class PeliculaControllers {
 
   updatedPelicula = async (req, res) => {
     try {
+      const {id,titulo,anio,director,genero} = req.params
+      //const { anio, director,genero} = req.body
+      const query = `UPDATE peliculas SET titulo=?, anio=?, director=?, genero=? WHERE id=?`;
+       const [data] = await dbConnection.query(query, [titulo, anio, director, genero, id]);
+
       res.status(200).send({ success: true, message: "Update de Pelicula" });
+      console.log(data)
     } catch (error) {
       res.status(400).send({ success: false, message: error });
     }
