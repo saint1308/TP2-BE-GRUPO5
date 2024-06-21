@@ -1,4 +1,5 @@
 import dbConennection from "../dbConnection/dbConnection.js";
+import Pelicula from "../Model/Pelicula.js";
 
 class PeliculaControllers {
   getAllPeliculas = async (req, res) => {

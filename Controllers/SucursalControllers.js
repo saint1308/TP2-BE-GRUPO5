@@ -1,4 +1,6 @@
+import Sucursal from "../Model/Sucursal.js";
 import dbConennection from "../dbConnection/dbConnection.js";
+
 
 class SucursalControllers {
   getAllSucursales = async (req, res) => {
