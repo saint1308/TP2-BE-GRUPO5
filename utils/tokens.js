@@ -10,3 +10,7 @@ export const generateToken=(payload)=>{
     return token
 }
 
+export const validateToken=(token)=>{
+    const verifytoken= jwt.verify(token, SECRET)
+    return verifytoken
+}

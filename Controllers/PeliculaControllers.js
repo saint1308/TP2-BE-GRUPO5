@@ -119,5 +119,23 @@ class PeliculaControllers {
       res.status(400).send({ success: false, message: error.message });
     }
   };
+
+  //tengo que acceder al token se ejecuta con un get
+  me= async(req,res)=>{
+    try {
+      //el req devuelve el token (entre otras cosas)
+      console.log(req)
+    } catch (error) {
+      res.status(400).send({ success: false, message: error.message });
+  
+    }
+  }
+
 }
+
+
+
+
+
+
 export default PeliculaControllers;

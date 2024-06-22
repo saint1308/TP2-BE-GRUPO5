@@ -6,6 +6,7 @@ const peliculaRoutes = Router();
 const peliculaController = new PeliculaControllers();
 
 peliculaRoutes.post("/", peliculaController.createPelicula);
+peliculaRoutes.get("/me", peliculaController.me);
 peliculaRoutes.get("/", peliculaController.getAllPeliculas);
 peliculaRoutes.get("/:titulo", peliculaController.getPeliculaByTitulo);
 peliculaRoutes.put("/:id", peliculaController.updatedPelicula);
