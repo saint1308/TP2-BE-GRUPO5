@@ -2,9 +2,14 @@ import express from "express";
 import routes from "./Routes/Routes.js";
 import dbConennection from "./dbConnection/dbConnection.js";
 import morgan from "morgan";
+import { SERVER_PORT } from "./config/config.js";
+
+//el archivo .env maneja las variables de entorno (para no tenerlas a la vista en la dbConnection), debo agregarla a
+//package.json en "dev" y en "start". Las variables las importo en el config.js para despues distribuirlas al resto
+//console.log(process.env.DB_PORT)
 
 const app = express();
-const PORT = 3000;
+
 
 app.use(morgan("tiny"))
 app.use(express.json())
@@ -21,6 +26,6 @@ app.use((req,res,next)=>{
 
 await dbConennection.sync()
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+app.listen(SERVER_PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${SERVER_PORT}`);
 });

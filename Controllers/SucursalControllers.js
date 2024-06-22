@@ -1,5 +1,4 @@
-import Sucursal from "../Model/Sucursal.js";
-import dbConennection from "../dbConnection/dbConnection.js";
+import {Sucursal, Pelicula} from "../Model/models.js";
 
 
 class SucursalControllers {

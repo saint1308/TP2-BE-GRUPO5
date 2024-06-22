@@ -1,4 +1,4 @@
-import Pelicula from "../Model/Pelicula.js";
+import {Pelicula, Sucursal} from "../Model/models.js";
 
 class PeliculaControllers {
 
@@ -78,9 +78,17 @@ class PeliculaControllers {
 
   deletePelicula = async (req, res) => {
     try {
+
+      const {id} = req.params
+  
+       const data = await Pelicula.destroy({where:{id}})
+
+       if(data === 0) throw new Error("No existe la pelicula")
+      console.log(data)
+
       res.status(200).send({ success: true, message: "Delete de Pelicula" });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   };
 }
