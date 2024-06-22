@@ -27,4 +27,8 @@ Pelicula.init(
   }
 );
 
+
+
+
+
 export default Pelicula;

@@ -9,7 +9,7 @@ peliculaRoutes.post("/", peliculaController.createPelicula);
 peliculaRoutes.get("/", peliculaController.getAllPeliculas);
 peliculaRoutes.get("/:titulo", peliculaController.getPeliculaByTitulo);
 peliculaRoutes.put("/:id", peliculaController.updatedPelicula);
-peliculaRoutes.delete("/:id", peliculaController.deletePelicula);
+peliculaRoutes.delete("/", peliculaController.deletePelicula);
 
 
 
