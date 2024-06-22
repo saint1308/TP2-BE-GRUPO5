@@ -124,7 +124,7 @@ class PeliculaControllers {
   me= async(req,res)=>{
     try {
       //el req devuelve el token (entre otras cosas)
-      console.log(req)
+      console.log(req.cookies.token)
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
   
