@@ -1,11 +1,30 @@
-import dbConennection from "../dbConnection/dbConnection.js";
 import Pelicula from "../Model/Pelicula.js";
 
 class PeliculaControllers {
+
+  //usamos los metodos de sequalize para evitar tener que pasar las query por escrito y se vuelva tedioso
+  createPelicula= async (req, res) => {
+    try {
+      //desestructuramos el request con lo que necesitamos para crear el objeto
+
+      const {titulo,anio,director,genero} = req.body;
+      const data = await Pelicula.create({titulo,anio,director,genero});
+
+      res.status(200).send({ success: true, message: "Ok, PeliculaCOntrollers" });
+      console.log(data);
+    } catch (error) {
+      res.status(400).send({ success: false, message: error });
+    }
+  };
+
+
   getAllPeliculas = async (req, res) => {
     try {
-      const query = "SELECT titulo,anio,director,genero FROM peliculas";
-      const data = await dbConennection.query(query);
+      
+      const data = await Pelicula.findAll({
+        //si no le pongo esto me trae todos los campos, esto es como un filtro
+        attributes:["id","titulo","director"]
+      })
 
       res
         .status(200)
@@ -22,8 +41,15 @@ class PeliculaControllers {
     
     try {
       const {titulo} = req.params
-      const query = `SELECT titulo, anio, director, genero FROM peliculas WHERE titulo = "${titulo}"`;
-      const data = await dbConennection.query(query);
+      const data = await Pelicula.findOne({
+        where:{
+          //es lo mismo que poner title:title , quiero que el title que busco sea igual al que tengo en la tabla y 
+          //me lo devuelva
+          titulo
+        },
+        //si no le pongo esto me trae todos los campos, esto es como un filtro
+        attributes:["id","titulo","director"]
+      })
 
       res.status(200).send({ success: true, message: "Pelicula por titulo" });
       console.log(data)
@@ -34,10 +60,14 @@ class PeliculaControllers {
 
   updatedPelicula = async (req, res) => {
     try {
-      const {id,titulo,anio,director,genero} = req.params
+      const {id} = req.params
+      const {titulo,anio,director,genero} = req.body
       //const { anio, director,genero} = req.body
-      const query = `UPDATE peliculas SET titulo=?, anio=?, director=?, genero=? WHERE id=?`;
-       const [data] = await dbConnection.query(query, [titulo, anio, director, genero, id]);
+  
+       const data = await Pelicula.update(
+        {titulo,anio,director,genero},
+        {where:{id}}
+      )
 
       res.status(200).send({ success: true, message: "Update de Pelicula" });
       console.log(data)
