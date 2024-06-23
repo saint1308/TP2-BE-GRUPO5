@@ -30,13 +30,13 @@ class PeliculaControllers {
         //si no le pongo esto me trae todos los campos, esto es como un filtro
         attributes:["id","titulo","director"]
       })
-    
+      if(data.length===0) throw new Error("No hay peliculas")
       res.status(200).send({success: true, message: "Ok, PeliculaCOntrollers" });
       console.log(data);
       // console.log(data[0][0].titulo)
       // LA BASE DEVUELVE UN ARRAY, CON OTRO ARRAY QUE CONTIENE LOS OBJETOS PELICULA, E IMPRIMO "titulo"
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message  });
     }
   };
 
@@ -53,11 +53,11 @@ class PeliculaControllers {
         //si no le pongo esto me trae todos los campos, esto es como un filtro
         attributes:["id","titulo","director"]
       })
-
+      if(data === null) throw new Error("Esa pelicula no existe")
       res.status(200).send({ success: true, message: "Pelicula por titulo" });
       console.log(data)
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   };
 
@@ -65,7 +65,7 @@ class PeliculaControllers {
     try {
       const {id} = req.params
       const {titulo,anio,director,genero} = req.body
-      //const { anio, director,genero} = req.body
+     
   
        const data = await Pelicula.update(
         {titulo,anio,director,genero},
@@ -77,37 +77,21 @@ class PeliculaControllers {
       res.status(200).send({ success: true, message: "Update de Pelicula" });
       console.log(data)
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message  });
     }
   };
 
   deletePelicula = async (req, res) => {
     try {
 
-      //const {id} = req.params
+      
       const {titulo} = req.body
   
        const data = await Pelicula.findOne({where:{titulo}})
 
        if(!data) throw new Error("No existe la pelicula")
 
-      //ejemplo que hago para guardar cosas en la memoria con tokens.js
-
-      const payload ={
-          id:data.id,
-          titulo:data.titulo
-      }
       
-      //genero el token
-
-      const token = generateToken(payload)
-      console.log("Tu token es" + token)
-
-      //voy a guardar el token en una cookie
-      //como primer parametro le paso el nombre que le voy a poner a la cookie y liego el token
-
-      res.cookie("token",token)
-      //sigue desde 2:22:00 de la clase 10
 
        const pelicula = await Pelicula.destroy({where:{titulo}}) 
         console.log(pelicula)
