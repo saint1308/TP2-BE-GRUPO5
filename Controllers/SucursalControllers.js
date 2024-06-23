@@ -23,13 +23,18 @@ class SucursalControllers {
 
   getAllSucursales = async (req, res) => {
     try {
-    //   const query = "SELECT titulo,anio,director,genero FROM peliculas";
-    //   const data = await dbConennection.query(query);
+      
+      const data = await Sucursal.findAll({
+        //si no le pongo esto me trae todos los campos, esto es como un filtro
+        attributes:["id","nombre","localidad"]
+      })
 
-      res
-        .status(200)
-        .send({ success: true, message: "TODAS LAS SUCURSALES" });
-    //   console.log(data);
+      
+
+      res.status(200).send({success: true, message: "Ok, Get All Sucursales" });
+      console.log(data);
+      // console.log(data[0][0].titulo)
+      // LA BASE DEVUELVE UN ARRAY, CON OTRO ARRAY QUE CONTIENE LOS OBJETOS PELICULA, E IMPRIMO "titulo"
     } catch (error) {
       res.status(400).send({ success: false, message: error });
     }
@@ -37,26 +42,65 @@ class SucursalControllers {
 
   getSucursalByNombre = async (req, res) => {
     try {
+      const {nombre} = req.params
+      const data = await Sucursal.findOne({
+        where:{
+          //es lo mismo que poner title:title , quiero que el title que busco sea igual al que tengo en la tabla y 
+          //me lo devuelva
+          nombre
+        },
+        //si no le pongo esto me trae todos los campos, esto es como un filtro
+        attributes:["id","nombre","localidad"]
+      })
+
+      if(data === null) throw new Error("No existe esa Sucursal")
+
       res.status(200).send({ success: true, message: "Sucursal por nombre" });
+      console.log(data)
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   };
 
   updatedSucursal = async (req, res) => {
     try {
-      res.status(200).send({ success: true, message: "Update de Sucursal" });
-    } catch (error) {
-      res.status(400).send({ success: false, message: error });
-    }
-  };
+      const {id} = req.params
+      const {nombre,calle,altura,localidad} = req.body
+      //const { anio, director,genero} = req.body
+  
+       const data = await Sucursal.update(
+        {nombre,calle,altura,localidad},
+        {where:{id}}
+      )
 
-  deleteSucursal = async (req, res) => {
-    try {
-      res.status(200).send({ success: true, message: "Delete de Sucursal" });
+      res.status(200).send({ success: true, message: " OK Update de Sucursal " });
+      console.log(data)
     } catch (error) {
       res.status(400).send({ success: false, message: error });
     }
-  };
+} 
+
+
+deleteSucursal = async (req, res) => {
+  try {
+
+    //const {id} = req.params
+    const {nombre} = req.body
+
+     const data = await Sucursal.findOne({where:{nombre}})
+
+     if(!data) throw new Error("No existe la Sucursal")
+
+     const sucursal = await Sucursal.destroy({where:{nombre}}) 
+    console.log(sucursal)
+      
+    res.status(200).send({ success: true, message: "Sucursal eliminada con exito" });
+  } catch (error) {
+    res.status(400).send({ success: false, message: error.message });
+  }
+};
+
+
+
 }
 export default SucursalControllers;
