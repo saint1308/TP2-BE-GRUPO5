@@ -5,12 +5,12 @@ const peliculaRoutes = Router();
 
 const peliculaController = new PeliculaControllers();
 
-peliculaRoutes.post("/", peliculaController.createPelicula);
-peliculaRoutes.get("/me", peliculaController.me);
 peliculaRoutes.get("/", peliculaController.getAllPeliculas);
+peliculaRoutes.post("/", peliculaController.createPelicula);
+peliculaRoutes.delete("/", peliculaController.deletePelicula);
+peliculaRoutes.get("/me", peliculaController.me);
 peliculaRoutes.get("/:titulo", peliculaController.getPeliculaByTitulo);
 peliculaRoutes.put("/:id", peliculaController.updatedPelicula);
-peliculaRoutes.delete("/", peliculaController.deletePelicula);
 
 
 

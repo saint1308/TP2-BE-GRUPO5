@@ -27,4 +27,4 @@ Sucursal.init(
   }
 );
 
-export default Sucursal;
+export default Sucursal

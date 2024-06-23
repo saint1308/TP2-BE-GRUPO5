@@ -27,8 +27,8 @@ Pelicula.init(
   }
 );
 
+export default Pelicula
 
 
 
 
-export default Pelicula;

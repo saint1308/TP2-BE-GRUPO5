@@ -11,6 +11,6 @@ export const generateToken=(payload)=>{
 }
 
 export const validateToken=(token)=>{
-    const verifytoken= jwt.verify(token, SECRET)
-    return verifytoken
+    const verifyToken= jwt.verify(token, SECRET)
+    return verifyToken
 }

@@ -1,4 +1,4 @@
-import {Pelicula, Sucursal} from "../Model/models.js";
+import {Pelicula} from "../Model/models.js";
 import { generateToken, validateToken } from "../utils/tokens.js";
 
 class PeliculaControllers {
@@ -136,7 +136,7 @@ class PeliculaControllers {
     }
   }
 
-}
+} 
 
 
 
