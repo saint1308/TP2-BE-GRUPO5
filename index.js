@@ -5,8 +5,6 @@ import dbConennection from "./dbConnection/dbConnection.js";
 const app = express();
 const PORT = 3000;
 
-
-
 app.use(routes);
 
 await dbConennection.sync()
