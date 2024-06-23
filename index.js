@@ -20,9 +20,6 @@ app.use(cookieParser())
 app.use(routes);
 
 
-
-
-
 app.use((req,res,next)=>{
   res.status(404).send({success:false, message:"not found"})
 })
