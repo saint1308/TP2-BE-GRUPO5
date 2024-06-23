@@ -5,12 +5,12 @@ const sucursalesRoutes = Router();
 
 const sucursalController = new sucursalControllers();
 
+sucursalesRoutes.post("/", sucursalController.createSucursal);
 sucursalesRoutes.get("/", sucursalController.getAllSucursales);
-sucursalesRoutes.get("/:titulo", sucursalController.getSucursalByNombre);
-//sucursalesRoutes.post("/:titulo", sucursalController.getSucursalByNombre);
-sucursalesRoutes.put("/:titulo", sucursalController.updatedSucursal);
-sucursalesRoutes.delete("/:titulo", sucursalController.deleteSucursal);
-
+sucursalesRoutes.get("/:nombre", sucursalController.getSucursalByNombre);
+sucursalesRoutes.put("/:id", sucursalController.updatedSucursal);
+sucursalesRoutes.delete("/:nombre", sucursalController.deleteSucursal);
+sucursalesRoutes.post("/:nombre",sucursalController.addPeliculaToSucursal)
 
 
 export default sucursalesRoutes;

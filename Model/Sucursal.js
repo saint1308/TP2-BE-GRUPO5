@@ -23,7 +23,8 @@ Sucursal.init(
     },
   },
   {sequelize:dbConennection,
-    modelName:"Sucursale"
+    modelName:"Sucursal",
+    tableName: 'Sucursales'
   }
 );
 
