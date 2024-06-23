@@ -10,7 +10,7 @@ sucursalesRoutes.get("/", sucursalController.getAllSucursales);
 sucursalesRoutes.get("/:nombre", sucursalController.getSucursalByNombre);
 sucursalesRoutes.put("/:id", sucursalController.updatedSucursal);
 sucursalesRoutes.delete("/:nombre", sucursalController.deleteSucursal);
-
+sucursalesRoutes.post("/:nombre",sucursalController.addPeliculaToSucursal)
 
 
 export default sucursalesRoutes;

@@ -30,9 +30,7 @@ class PeliculaControllers {
         //si no le pongo esto me trae todos los campos, esto es como un filtro
         attributes:["id","titulo","director"]
       })
-
-      
-
+    
       res.status(200).send({success: true, message: "Ok, PeliculaCOntrollers" });
       console.log(data);
       // console.log(data[0][0].titulo)

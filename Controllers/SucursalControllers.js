@@ -1,7 +1,35 @@
-import {Sucursal, Pelicula} from "../Model/models.js";
+import {Sucursal, Pelicula, PeliculaSucursal} from "../Model/models.js";
 import { generateToken, validateToken } from "../utils/tokens.js";
 
 class SucursalControllers {
+
+
+  addPeliculaToSucursal = async(req,res) =>{
+    try{
+    const {nombre} =req.params //nombre de la sucursal (que viene por parametro)
+    const {titulo} = req.body // nombre de la pelicula que quiero agregar (que viene por un formulario)
+    
+    //busco en la tabla si existe una sucursal con ese nombre
+    const sucursal =await Sucursal.findOne({where:{nombre}})
+    if (!sucursal) throw new Error("Sucursal no encontrada");
+    //busco en la tabla pelicula una pelicula con ese nombre
+    const pelicula = await Pelicula.findOne({ where: { titulo: titulo } });
+    if (!pelicula) throw new Error("Película no encontrada");
+
+    //voy a crear la relacion en la tabla intermedia peliculasucursal (le voy a mandar ambos id)
+    const relacion = await PeliculaSucursal.create({ peliculaId: pelicula.id, sucursalId: sucursal.id });
+    
+
+    res.status(201).send({ success: true, data: relacion });
+    }catch(error){
+      res.status(400).send({ success: false, message: error.message });
+    }
+
+  }
+
+
+
+
 
   createSucursal= async (req, res) => {
     try {
