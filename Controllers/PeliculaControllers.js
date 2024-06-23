@@ -1,5 +1,5 @@
 import {Pelicula, Sucursal} from "../Model/models.js";
-import { generateToken } from "../utils/tokens.js";
+import { generateToken, validateToken } from "../utils/tokens.js";
 
 class PeliculaControllers {
 
@@ -120,11 +120,16 @@ class PeliculaControllers {
     }
   };
 
-  //tengo que acceder al token se ejecuta con un get
+  //tengo que acceder al token se ejecuta con un get, me sirve para chequear por ej si estoy logueado para hacer x accion, persiste datos cuando refrescas la pagina
   me= async(req,res)=>{
     try {
       //el req devuelve el token (entre otras cosas)
-      console.log(req.cookies.token)
+      //console.log(req.cookies.token)
+      const {token}= req.cookies
+      //agarro el token y lo descifro con el validateToken
+      const validate = validateToken(token)
+      console.log(validate)
+      res.status(200).send({ success: true, message: validate.payload });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
   
