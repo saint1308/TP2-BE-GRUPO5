@@ -14,6 +14,7 @@ PeliculaSucursal.init({
     references: {
       model: 'Peliculas', 
       key: 'id',
+      
     },
   },
   sucursalId: {
