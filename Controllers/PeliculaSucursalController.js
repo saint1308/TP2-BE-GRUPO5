@@ -86,7 +86,7 @@ class PeliculaSucursalController {
 
       res.status(200).json({ success: true, message: 'Relación eliminada' });
     } catch (error) {
-      console.error('Error:', error);
+      
       res.status(500).json({ success: false, message: error.message });
     }
   };

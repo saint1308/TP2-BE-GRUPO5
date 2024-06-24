@@ -30,5 +30,5 @@ await seed()
 
 
 app.listen(SERVER_PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${SERVER_PORT}`);
+  console.log(`Todo OK en el servidor`);
 });
