@@ -1,4 +1,4 @@
-import { PeliculaSucursal, Pelicula, Sucursal } from "../Model/models.js";
+import { PeliculaSucursal, Pelicula, Sucursal, PeliculaSucursal } from "../Model/models.js";
 
 // const pelicula = new Pelicula()
 // const sucursal = new Sucursal()
@@ -100,5 +100,41 @@ class PeliculaSucursalController {
 //       res.status(400).send({ success: false, message: error });
 //     }
 //   };
+
+
+deletePeliculaSucursal = async (req, res) => {
+  try{
+    const { id } = req.params;
+    const data = await PeliculaSucursal.findOne({where:{id}})
+    if(!data) throw new Error("No existe la relacion PeliculaSucursal")
+      const PeliculaSucursal = await PeliculaSucursal.destroy({where:{id}}) 
+    console.log(PeliculaSucursal)
+     
+    res.status(200).send({ success: true, message: "relacion PeliculaSucursal eliminada con exito" });
+  } catch (error) {
+    res.status(400).send({ success: false, message: error.message });
+  }
+  }
+}
+
+getPeliculasFromSucursal = async (req, res) => {
+  try {
+         const { id } = req.params; //buscamos con el id de sucursal
+  
+         const data = await Pelicula.findAll({
+           include: [
+             {
+               model: Sucursal,
+               through: { attributes: [] }, 
+               where: { id },
+             },
+            res
+           ],
+         });
+}
+catch (error) {
+  res.status(400).send({ success: false, message: error.message });
+}
+
 }
 export default PeliculaSucursalController;
