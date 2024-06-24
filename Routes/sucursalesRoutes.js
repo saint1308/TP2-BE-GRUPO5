@@ -16,7 +16,7 @@ sucursalesRoutes.delete("/:nombre", sucursalController.deleteSucursal);
 //PELICULAS SUCURSALES
 sucursalesRoutes.post("/agregarPelicula",peliculasSucursalesController.addPeliculaToSucursal)
 sucursalesRoutes.get("/listarPeliculas/:id",peliculasSucursalesController.getPeliculasFromSucursal)
-// sucursalesRoutes.get("/listarPeliculas/:id",peliculasSucursalesController.getPeliculasFromSucursal)
+sucursalesRoutes.delete("/eliminarPelicula/:id",peliculasSucursalesController.deletePeliculasFromSucursal)
 
 
 

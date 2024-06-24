@@ -64,29 +64,34 @@ class PeliculaSucursalController {
     }
   };
 
-//   getPeliculasFromSucursal = async (req, res) => {
-//     try {
-//       const { id } = req.params;
+  //FUNCIONA PERFECTO (NO TOCAR)
+  deletePeliculasFromSucursal = async (req, res) => {
+    const { id } = req.params;
+    const { titulo } = req.body;
 
-//       const data = await Pelicula.findAll({
-//         include: [
-//           {
-//             model: Sucursal,
-//             through: { attributes: [] }, // No necesitamos atributos de la tabla intermedia
-//             where: { id },
-//           },
-//         ],
-//       });
+    try {
+      const sucursal = await Sucursal.findByPk(id);
+      if (!sucursal) {
+        return res.status(404).json({ success: false, message: 'Sucursal no encontrada' });
+      }
 
-//       res
-//         .status(200)
-//         .send({ success: true, message: "Ok, PeliculaCOntrollers" });
-//       console.log(data);
-//       console.log(data);
-//       console.log(data);
-//     } catch (error) {
-//       res.status(400).send({ success: false, message: error });
-//     }
-//   };
+      const pelicula = await Pelicula.findOne({ where: { titulo } });
+      if (!pelicula) {
+        return res.status(404).json({ success: false, message: 'Pelicula no encontrada' });
+      }
+
+      await PeliculaSucursal.destroy({
+        where: { sucursalId: id, peliculaId: pelicula.id }
+      });
+
+      res.status(200).json({ success: true, message: 'Relación eliminada' });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ success: false, message: error.message });
+    }
+  };
 }
+   
+
+
 export default PeliculaSucursalController;
